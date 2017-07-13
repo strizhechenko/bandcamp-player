@@ -24,6 +24,7 @@ Description
 
 bandcamp-player is a small command-line app to stream audio from BandCamp.com. It requires the Python interpreter, version 3.4+ and is not platform specific. It is released to the public domain, which means you can modify it, redistribute it or use it how ever you like. It uses bandcamp-dl project that allow you to download music.
 
+You also need mplayer installed.
 
 Bugs
 ====
