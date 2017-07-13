@@ -5,7 +5,10 @@ bandcamp-player
    :target: https://landscape.io/github/strizhechenko/bandcamp-player/master
    :alt: Code Health
 
-|landscape|
+.. |travis| image:: https://travis-ci.org/strizhechenko/bandcamp-player.svg?branch=master
+   :target: https://travis-ci.org/strizhechenko/bandcamp-player
+
+|landscape| |travis|
 
 streaming random music from bandcamp by specified tag
 
