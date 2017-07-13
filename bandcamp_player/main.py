@@ -13,30 +13,30 @@ from bs4 import BeautifulSoup
 logging.basicConfig(level=logging.INFO)
 
 
-class BandcampRequest:
+class BandcampRequest(object):
     headers = {'User-Agent': 'bandcamp_player/0.1'}
 
     @staticmethod
     def get(url):
-        logging.info(f"request: {url}")
+        logging.info("request: %s", url)
         return requests.get(url, headers=BandcampRequest.headers)
 
 
-class BandcampAlbumResult:
+class BandcampAlbumResult(object):
     def __init__(self, soup):
         self.title = soup.attrs['title']
         self.href = soup.attrs['href']
 
     def __repr__(self):
-        return f'\n<BandcampResult: title: {self.title} href: {self.href}>'
+        return '\n<BandcampResult: title: {0} href: {1}>'.format(self.title, self.href)
 
 
-class BandcampTag:
+class BandcampTag(object):
     def __init__(self, tag):
         self.tag = tag
 
     def url(self):
-        return f"https://bandcamp.com/tag/{self.tag}"
+        return "https://bandcamp.com/tag/{0}".format(self.tag)
 
     def page(self):
         return BandcampRequest.get(self.url()).content
@@ -52,7 +52,7 @@ class BandcampTag:
         return albums[0]
 
 
-class BandcampAlbum:
+class BandcampAlbum(object):
     def __init__(self, url):
         self.url = url
 
@@ -64,7 +64,7 @@ class BandcampAlbum:
         results = soup.find('table', attrs={'id': 'track_table'}).find_all('a')
         results = [item.attrs['href'] for item in results if item.has_attr('href')]
         results = [item for item in results if '#lyrics' not in item]
-        return [f"{self.url[:self.url.find('/album')]}{item}" for item in results]
+        return [self.url[:self.url.find('/album')] + item for item in results]
 
     def track_random(self):
         tracks = self.tracks()
@@ -72,7 +72,7 @@ class BandcampAlbum:
         return tracks[0]
 
 
-class BandcampTrack:
+class BandcampTrack(object):
     tmp_file_path = "/tmp/bandcamp.mp3"
 
     def __init__(self, url):
@@ -82,7 +82,7 @@ class BandcampTrack:
         data = BandcampRequest.get(self.url).content
         soup = BeautifulSoup(data, "html.parser")
         track_meta = json.loads(BandcampJSON(soup).generate()[0])
-        return f"https:{track_meta['trackinfo'][0]['file']['mp3-128']}"
+        return "https:" + track_meta['trackinfo'][0]['file']['mp3-128']
 
     def save(self):
         response = BandcampRequest.get(self.download_link())
@@ -93,7 +93,7 @@ class BandcampTrack:
 
     def play(self):
         self.save()
-        os.system(f"mplayer {self.tmp_file_path}")
+        os.system("mplayer " + self.tmp_file_path)
 
 
 def __main():
