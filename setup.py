@@ -9,6 +9,16 @@ setup(
     author='Oleg Strizhechenko',
     author_email='oleg.strizhechenko@gmail.com',
     description='Utility for streaming random music from bandcamp by specified tag',
+    classifiers=[
+        'Development Status :: 4 - Beta',
+        'Intended Audience :: End Users/Desktop',
+        'Topic :: Multimedia :: Sound/Audio',
+        'License :: Public Domain',
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
+    ],
     install_requires=[
         'beautifulsoup4',
         'requests',
