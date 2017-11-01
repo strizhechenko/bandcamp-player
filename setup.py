@@ -3,7 +3,7 @@ from setuptools import setup
 
 setup(
     name='bandcamp-player',
-    version='0.1.1',
+    version='0.2.1',
     packages=['bandcamp_player', 'bandcamp_parser'],
     url='https://github.com/strizhechenko/bandcamp-player',
     license='MIT',
