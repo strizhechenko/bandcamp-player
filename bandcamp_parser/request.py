@@ -11,5 +11,6 @@ class Request(object):
     @staticmethod
     def get(url) -> requests.Response:
         """ :returns: Response from bandcamp """
+        url = url.replace("https:https:", "https:")
         logging.info("request: %s", url)
         return requests.get(url, headers=Request.headers)
